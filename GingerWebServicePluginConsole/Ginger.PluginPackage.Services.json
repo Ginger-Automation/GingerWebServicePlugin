@@ -1,0 +1,52 @@
+[
+  {
+    "ServiceId": "WebService",
+    "Description": null,
+    "IsSession": false,
+    "Actions": [
+      {
+        "ActionId": "RunWebService",
+        "Description": "Run Web Service",
+        "Interface": null,
+        "InputValues": [
+          {
+            "Param": "RestURL",
+            "ParamTypeName": "string"
+          },
+          {
+            "Param": "RestAction",
+            "ParamTypeName": "enum{GET,PUT,POST,DELETE,PATCH}"
+          },
+          {
+            "Param": "RequestType",
+            "ParamTypeName": "enum{NONE,APP_JSON,APP_PDF,TEXT_PLAIN,XML}"
+          },
+          {
+            "Param": "HTTPHeaders",
+            "ParamTypeName": "List<GingerWebServicePluginConsole.HeaderParam>{Properties=Key:String,Value:String}"
+          },
+          {
+            "Param": "RequestBody",
+            "ParamTypeName": "string"
+          },
+          {
+            "Param": "ProxyIPAddress",
+            "ParamTypeName": "string"
+          },
+          {
+            "Param": "ProxyPort",
+            "ParamTypeName": "string"
+          },
+          {
+            "Param": "CertificateFilePath",
+            "ParamTypeName": "string"
+          },
+          {
+            "Param": "CertificatePassword",
+            "ParamTypeName": "string"
+          }
+        ]
+      }
+    ]
+  }
+]

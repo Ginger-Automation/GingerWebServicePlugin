@@ -1,0 +1,8 @@
+﻿{
+  "Id": "WebService",
+  "Version": "1.0.1",
+  "ProjectUrl": "https://github.com/Ginger-Automation/GingerWebServicePlugin",
+  "Description": "Web Services Plugin",
+  "Summary": "Enable to call RestAPI",
+  "StartupDLL": "GingerWebServicePluginConsole.dll"
+}
