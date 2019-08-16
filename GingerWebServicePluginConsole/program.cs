@@ -23,7 +23,7 @@ namespace GingerWebServicePluginConsole
 
 
                     //gingerNodeStarter.StartNode("WebService Service", new GingerWebService(), "10.120.8.135", 15001);
-                    gingerNodeStarter.StartNode("WebService Service", new GingerWebService(), SocketHelper.GetLocalHostIP(), 15007);
+                    gingerNodeStarter.StartNode("WebService Service", new GingerWebService(), SocketHelper.GetLocalHostIP(), 15009);
                     //gingerNodeStarter.StartNode("WebService Service", new GingerWebService(), "10.120.21.102", 15005);
                     //gingerNodeStarter.StartNode("WebService Service", new GingerWebService(), "10.120.8.162", 15008);
                 }

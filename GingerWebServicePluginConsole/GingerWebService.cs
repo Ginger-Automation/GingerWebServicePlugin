@@ -112,19 +112,12 @@ namespace GingerWebServicePluginConsole
             // execute the request
             IRestResponse response = restClient.Execute(restRequest);
 
-            // response code
+            
             int numericStatusCode = (int)response.StatusCode;
 
-            // debug purpose
-            if (string.IsNullOrEmpty(response.Content))
-            {
-                Console.WriteLine("Error Message:" + response.ErrorMessage);
-                Console.WriteLine("Error Exception:" + response.ErrorException);
-            }
-            else
-            {
-                Console.WriteLine(response.Content);
-            }
+
+            
+
 
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("Made a call to " + RestURL);
@@ -133,26 +126,42 @@ namespace GingerWebServicePluginConsole
             stringBuilder.AppendLine("Status Code :" + numericStatusCode);
             stringBuilder.AppendLine("Status Code Str :" + response.StatusCode.ToString());
             stringBuilder.AppendLine("Response Status :" + response.ResponseStatus);
+            stringBuilder.AppendLine("Error Message :" + response.ErrorMessage);
 
             // adding response to GA object
             GA.AddExInfo(stringBuilder.ToString());
 
-            // add all the output values to the GA object
-            GA.AddOutput("ResponseContent", response.Content);
-            //GA.AddOutput("ResponseContent", response.Content.Substring(1,1000));
-            GA.AddOutput("ResponseStatus", response.ResponseStatus);
-            GA.AddOutput("ResponseCode", numericStatusCode);
-            GA.AddOutput("ResponseCodeStr", response.StatusCode.ToString());
-
-            int itr = 1;
-            foreach(Parameter parameter in response.Headers)
+            if (response.IsSuccessful)
             {
-                GA.AddOutput(parameter.Name, parameter.Value, "Response Header " + itr++);
+                Console.WriteLine(response.Content);
+                // add all the output values to the GA object
+                GA.AddOutput("ResponseContent", response.Content);
+                //GA.AddOutput("ResponseContent", response.Content.Substring(1,1000));
+                GA.AddOutput("ResponseStatus", response.ResponseStatus);
+                GA.AddOutput("ResponseCode", numericStatusCode);
+                GA.AddOutput("ResponseCodeStr", response.StatusCode.ToString());
+
+                int itr = 1;
+                foreach (Parameter parameter in response.Headers)
+                {
+                    GA.AddOutput(parameter.Name, parameter.Value, "Response Header " + itr++);
+                }
+
+                GA.AddOutput("ResponseURI", response.ResponseUri);
+                GA.AddOutput("ResponseErrorMessage", response.ErrorMessage);
             }
+            else
+            {
+                GA.AddError("Request failed error message = " + response.ErrorMessage);
+                Console.WriteLine("Error Message:" + response.ErrorMessage);
+                Console.WriteLine("Error Exception:" + response.ErrorException);
+            }
+            
+
+            
             //GA.AddOutput("ResponseHeaders", response.Headers);
 
-            GA.AddOutput("ResponseURI", response.ResponseUri);
-            GA.AddOutput("ResponseErrorMessage", response.ErrorMessage);
+            
         }
 
         //[GingerAction("RunScript", "Run web service")]
