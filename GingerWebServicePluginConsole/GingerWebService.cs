@@ -131,6 +131,7 @@ namespace GingerWebServicePluginConsole
             // adding response to GA object
             GA.AddExInfo(stringBuilder.ToString());
 
+            // User will have to check the status code if 200 or something else based on the case of what is expected
             if (response.IsSuccessful)
             {
                 Console.WriteLine(response.Content);
@@ -141,10 +142,12 @@ namespace GingerWebServicePluginConsole
                 GA.AddOutput("ResponseCode", numericStatusCode);
                 GA.AddOutput("ResponseCodeStr", response.StatusCode.ToString());
 
-                int itr = 1;
+                // Add headers
+                int index = 0;
                 foreach (Parameter parameter in response.Headers)
                 {
-                    GA.AddOutput(parameter.Name, parameter.Value, "Response Header " + itr++);
+                    index++;
+                    GA.AddOutput(parameter.Name, parameter.Value, "Response Header " + index);
                 }
 
                 GA.AddOutput("ResponseURI", response.ResponseUri);
