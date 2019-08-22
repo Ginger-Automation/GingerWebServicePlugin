@@ -23,7 +23,7 @@ namespace GingerWebServicePlugin
                 }
                 else
                 {
-                    //gingerNodeStarter.StartNode("Chrome Service 1", new SeleniumChromeService());
+                    gingerNodeStarter.StartNode("Rest Service 1", new RestService(),"10.20.124.188",15001);
 
                 }
                 gingerNodeStarter.Listen();
@@ -49,5 +49,5 @@ namespace GingerWebServicePlugin
         }
 
     }
-    }
+
 }

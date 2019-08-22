@@ -1,6 +1,7 @@
 ﻿using Ginger.Plugin.Platform.WebService;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -38,7 +39,7 @@ namespace GingerWebServicePlugin.Client
         private void SetProxySettings()
         {   
 #warning set all proxy modes
-            WebProxy Proxy = new WebProxy();
+            WebProxy Proxy = new WebProxy("http://genproxy.amdocs.com",8080);
             Handler.Proxy = Proxy;
       
 
@@ -51,13 +52,54 @@ namespace GingerWebServicePlugin.Client
 
         public GingerHttpResponseMessage PerformGetOperation(GingerHttpRequestMessage GingerRequestMessage)
         {
-            
-            PreparBasicRequest(GingerRequestMessage);
+            Handler = new HttpClientHandler();
+            WebProxy Proxy = new WebProxy("genproxy.amdocs.com", 8080);
+            Handler.Proxy = Proxy;
+            Client = new HttpClient(Handler);
 
-            return new GingerHttpResponseMessage();
+            PreparBasicRequest(GingerRequestMessage);
+            HttpResponseMessage Response=null;
+            try
+            {
+                Response = Client.SendAsync(RequestMessage).Result;
+            }
+            catch(Exception e)
+            {
+
+            }
+            finally
+            {
+                HandleResponseCookies(GingerRequestMessage);
+            }
+
+            GingerHttpResponseMessage GRM=new GingerHttpResponseMessage();
+
+            byte[] data = Response.Content.ReadAsByteArrayAsync().Result;
+            GRM.Resposne= Encoding.Default.GetString(data);
+
+            return GRM;
 
         }
+        private void HandleResponseCookies(GingerHttpRequestMessage GingerRequestMessage)
+        {
+      
+            if (GingerRequestMessage.CookieMode != eCookieMode.None)
+            {
 
+                CookieCollection responseCookies = Handler.CookieContainer.GetCookies(Client.BaseAddress);
+                foreach (Cookie RespCookie in responseCookies)
+                {
+                    if (SessionCokiesDic.Keys.Contains(RespCookie.Name) == false)
+                    {
+                        SessionCokiesDic.Add(RespCookie.Name, RespCookie);
+                    }
+                    else
+                    {
+                        SessionCokiesDic[RespCookie.Name] = RespCookie;
+                    }
+                }
+            }
+        }
 
         private void PreparBasicRequest(GingerHttpRequestMessage GingerRequestMessage)
         {
@@ -90,7 +132,7 @@ namespace GingerWebServicePlugin.Client
 
 
             SetCookies(GingerRequestMessage);
-
+            SetRequestContent(Method, GingerRequestMessage);
         }
 
 
