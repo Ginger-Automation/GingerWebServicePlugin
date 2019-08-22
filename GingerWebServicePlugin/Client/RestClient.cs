@@ -140,8 +140,8 @@ namespace GingerWebServicePlugin.Client
         private void SetContentType(GingerHttpRequestMessage GingerRequestMessage)
         {
             string ContentType=string.Empty;
-            if (GingerRequestMessage.ContentType == null)
-            {
+
+            Enum.TryParse(GingerRequestMessage.ContentType, out GingerRequestMessage.BodyContentType);
            
                 switch (GingerRequestMessage.BodyContentType)
                 {
@@ -166,7 +166,7 @@ namespace GingerWebServicePlugin.Client
                         ContentType = "text/xml";
                         break;
                 }
-            }
+            
 
             GingerRequestMessage.ContentType = ContentType;
         }
