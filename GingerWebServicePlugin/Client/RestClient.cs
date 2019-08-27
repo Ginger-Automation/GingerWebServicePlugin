@@ -33,15 +33,18 @@ namespace GingerWebServicePlugin.Client
             Client = new HttpClient(Handler);
         }
 
-     
+
 
         #region ProxySetUp
         private void SetProxySettings()
-        {   
+        {
 #warning set all proxy modes
-            WebProxy Proxy = new WebProxy("http://genproxy.amdocs.com",8080);
-            Handler.Proxy = Proxy;
-      
+
+            if (!string.IsNullOrEmpty(this.proxyUrl))
+            {
+                WebProxy Proxy = new WebProxy(this.proxyUrl);
+                Handler.Proxy = Proxy;
+            }
 
 
         }
@@ -50,11 +53,9 @@ namespace GingerWebServicePlugin.Client
 
 
 
-        public GingerHttpResponseMessage PerformGetOperation(GingerHttpRequestMessage GingerRequestMessage)
+        public GingerHttpResponseMessage PerformHttpOperation(GingerHttpRequestMessage GingerRequestMessage)
         {
-            Handler = new HttpClientHandler();
-            WebProxy Proxy = new WebProxy("genproxy.amdocs.com", 8080);
-            Handler.Proxy = Proxy;
+        
             Client = new HttpClient(Handler);
 
             PreparBasicRequest(GingerRequestMessage);
@@ -73,6 +74,19 @@ namespace GingerWebServicePlugin.Client
             }
 
             GingerHttpResponseMessage GRM=new GingerHttpResponseMessage();
+
+            GRM.StatusCode = Response.StatusCode;
+            GRM.Headers = new Dictionary<string, string>();
+            //keeping the same pattern as existing Ginger Webserviced Plugin
+            foreach (var Header in Response.Headers)
+            {
+                string headerValues = string.Empty;
+                foreach (string val in Header.Value.ToArray())
+                    headerValues = val + ",";
+                headerValues = headerValues.Remove(headerValues.Length - 1);
+                GRM.Headers.Add(Header.Key.ToString(), headerValues);
+            }
+
 
             byte[] data = Response.Content.ReadAsByteArrayAsync().Result;
             GRM.Resposne= Encoding.Default.GetString(data);
