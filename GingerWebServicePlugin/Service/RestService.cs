@@ -10,7 +10,7 @@ using System.Text;
 
 namespace GingerWebServicePlugin.Service
 {
-    [GingerService("ResetService", "Rest Service")]
+    [GingerService("RestService", "Rest Service")]
     public class RestService : IServiceSession, IWebServicePlatform
     {
         public IPlatformActionHandler PlatformActionHandler { get; set; } = new WebServicePlatformActionHandler();
