@@ -39,7 +39,7 @@ namespace GingerWebServicePlugin.Service
 
         public void StopSession()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
