@@ -11,7 +11,7 @@ using static Ginger.Plugin.Platform.WebService.RestAPIKeyBodyValues;
 
 namespace GingerWebServicePlugin.Client
 {
-    class RestClient : IRestClient
+    class RestClient : IHTTPClient
     {
         private string proxy;
         private string proxyUrl;
