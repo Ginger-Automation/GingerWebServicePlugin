@@ -1,0 +1,36 @@
+{
+  "InputParams": {
+    "EndPointURL": "http://localhost:5000/api/customer/put",
+    "NetworkCredentialsRadioButton": "Default",
+    "RequestBodyTypeRadioButton": "FreeText",
+    "CertificateTypeRadioButton": "AllSSL",
+    "DoNotFailActionOnBadRespose": "False",
+    "UseLegacyJSONParsing": "False",
+    "RequestBody": "{\r\n  \"id\": 0,\r\n  \"username\": \"string\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"phone\": \"string\",\r\n  \"userStatus\": 0\r\n}",
+    "ImportRequestFile": "False",
+    "ImportCetificateFile": "False",
+    "SecurityType": "None",
+    "AuthorizationType": "NoAuthentication",
+    "CookieMode": "New",
+    "RequestType": "PUT",
+    "ReqHttpVersion": "HTTPV11",
+    "ContentType": "JSon",
+    "ResponseContentType": "JSon",
+    "Headers": { "SomeHeader": "SomeHeaderValue" },
+    "RequestKeyValues": [
+      {
+        "ValueType": 0,
+        "FileBytes": null,
+        "Param": "key1",
+        "Value": "value1"
+      },
+      {
+        "ValueType": 0,
+        "FileBytes": null,
+        "Param": "key2",
+        "Value": "value2"
+      }
+    ]
+  },
+  "ActionType": "ActWebAPIRest"
+}

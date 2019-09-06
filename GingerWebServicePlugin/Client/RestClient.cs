@@ -22,9 +22,7 @@ namespace GingerWebServicePlugin.Client
         HttpClientHandler Handler = null;
         static Dictionary<string, Cookie> SessionCokiesDic;
         public RestClient(string proxy, string proxyUrl)
-        {
-
-
+        { 
             this.proxy = proxy;
             this.proxyUrl = proxyUrl;
             Handler = new HttpClientHandler();

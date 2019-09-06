@@ -1,0 +1,35 @@
+{
+  "InputParams": {
+    "EndPointURL": "http://localhost:5000/api/customer",
+    "NetworkCredentialsRadioButton": "Default",
+    "RequestBodyTypeRadioButton": "FreeText",
+    "CertificateTypeRadioButton": "AllSSL",
+    "DoNotFailActionOnBadRespose": "False",
+    "UseLegacyJSONParsing": "False",
+    "ImportRequestFile": "False",
+    "ImportCetificateFile": "False",
+    "SecurityType": "None",
+    "AuthorizationType": "NoAuthentication",
+    "CookieMode": "New",
+    "RequestType": "GET",
+    "ReqHttpVersion": "HTTPV11",
+    "ContentType": "JSon",
+    "ResponseContentType": "JSon",
+    "Headers": {},
+    "RequestKeyValues": [
+      {
+        "ValueType": 0,
+        "FileBytes": null,
+        "Param": "key1",
+        "Value": "value1"
+      },
+      {
+        "ValueType": 0,
+        "FileBytes": null,
+        "Param": "key2",
+        "Value": "value2"
+      }
+    ]
+  },
+  "ActionType": "ActWebAPIRest"
+}

@@ -1,0 +1,36 @@
+{
+  "InputParams": {
+    "EndPointURL": "http://localhost:5000/api/customer",
+    "NetworkCredentialsRadioButton": "Default",
+    "RequestBodyTypeRadioButton": "FreeText",
+    "CertificateTypeRadioButton": "AllSSL",
+    "DoNotFailActionOnBadRespose": "False",
+    "UseLegacyJSONParsing": "False",
+    "RequestBody": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"",
+    "ImportRequestFile": "False",
+    "ImportCetificateFile": "False",
+    "SecurityType": "None",
+    "AuthorizationType": "NoAuthentication",
+    "CookieMode": "New",
+    "RequestType": "POST",
+    "ReqHttpVersion": "HTTPV11",
+    "ContentType": "FormData",
+    "ResponseContentType": "JSon",
+    "Headers": { "SomeHeader": "SomeHeaderValue" },
+    "RequestKeyValues": [
+      {
+        "ValueType": 0,
+        "FileBytes": null,
+        "Param": "key1",
+        "Value": "value1"
+      },
+      {
+        "ValueType": 0,
+        "FileBytes": null,
+        "Param": "key2",
+        "Value": "value2"
+      }
+    ]
+  },
+  "ActionType": "ActWebAPIRest"
+}
