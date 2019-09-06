@@ -1,0 +1,8 @@
+{
+  "Id": "Ginger Rest Plugin",
+  "Version": "1.0.0",
+  "ProjectUrl": "git\\Pluginex1...",
+  "Description": "Example1",
+  "Summary": "Ginger Rest Plugin",
+  "StartupDll": "GingerWebServicePlugin.dll"
+}
