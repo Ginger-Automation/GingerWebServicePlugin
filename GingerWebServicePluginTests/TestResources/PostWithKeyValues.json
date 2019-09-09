@@ -6,7 +6,7 @@
     "CertificateTypeRadioButton": "AllSSL",
     "DoNotFailActionOnBadRespose": "False",
     "UseLegacyJSONParsing": "False",
-    "RequestBody": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"",
+    "RequestBody": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
     "ImportRequestFile": "False",
     "ImportCetificateFile": "False",
     "SecurityType": "None",
@@ -16,19 +16,25 @@
     "ReqHttpVersion": "HTTPV11",
     "ContentType": "FormData",
     "ResponseContentType": "JSon",
-    "Headers": { "SomeHeader": "SomeHeaderValue" },
+    "Headers": {},
     "RequestKeyValues": [
       {
         "ValueType": 0,
         "FileBytes": null,
-        "Param": "key1",
-        "Value": "value1"
+        "Param": "CustomerAddress",
+        "Value": "Area51"
       },
       {
         "ValueType": 0,
         "FileBytes": null,
-        "Param": "key2",
-        "Value": "value2"
+        "Param": "CustomerID",
+        "Value": "0"
+      },
+      {
+        "ValueType": 0,
+        "FileBytes": null,
+        "Param": "CustomerName",
+        "Value": "Donald"
       }
     ]
   },
