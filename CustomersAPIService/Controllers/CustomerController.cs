@@ -1,6 +1,8 @@
 ﻿using CustomersAPIService.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 
 namespace CustomersAPIService.Controllers
 {
@@ -35,19 +37,26 @@ namespace CustomersAPIService.Controllers
 
         // POST api/customer
         [HttpPost]
-        public string Post([FromBody] Customer customer)
+        public ActionResult<object> CustomerAction()
         {
             string status = null;
-            if (customer == null)
+            //if (customer == null)
+            //{
+            //    status = "Empty Customer Information - failed to add";
+            //}
+            //else
+            //{
+            //    CustomerManager.AddCustomer(customer);
+            //    status = "Customer Added";
+            //}
+            Customer c = new Customer()
             {
-                status = "Empty Customer Information - failed to add";
-            }
-            else
-            {
-                CustomerManager.AddCustomer(customer);
-                status = "Customer Added";
-            }
-            return status;
+                CustomerAddress = Request.Form["CustomerAddress"],
+                CustomerID = Request.Form["CustomerID"],
+                CustomerName= Request.Form["CustomerName"]
+            };
+
+            return c;
         }
 
 
@@ -58,25 +67,19 @@ namespace CustomersAPIService.Controllers
             HttpContext.Response.Headers.Add("MessageType", "Put");
             return CustomerManager.GetCustomers();
         }
-        // POST api/customer
-        //[HttpPost]
-        //public string Post([FromBody] List<Customer> customers)
-        //{
-        //    string status = null;
-        //    if (customers == null)
-        //    {
-        //        status = "Empty Customers Information - failed to add";
-        //    }
-        //    else
-        //    {
-        //        foreach (Customer customer in customers)
-        //        {
-        //            CustomerManager.AddCustomer(customer);
-        //        }                
-        //        status = "Customers Added";
-        //    }
-        //    return status;
-        //}
+
+
+
+        [HttpPost("add")]
+        public ActionResult<string> Add()
+        {
+            var body = new StreamReader(Request.Body);
+            //The modelbinder has already read the stream and need to reset the stream index
+    
+            var requestBody = body.ReadToEnd();
+            return requestBody;
+        }
+
 
         // PUT api/customer/5
         [HttpPut("{id}")]
