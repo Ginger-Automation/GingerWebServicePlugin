@@ -26,7 +26,7 @@ namespace GingerWebServicePlugin.Service
         [MinLength(10)]
         [ServiceConfiguration("Proxy Url", "Proxy URL or prixy autoconfig url")]
         public string ProxyUrl { get; set; }
-        public IRestClient RestClient { get; set; }
+        public IHTTPClient RestClient { get; set; }
 
         #endregion
 

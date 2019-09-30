@@ -11,7 +11,7 @@ using static Ginger.Plugin.Platform.WebService.RestAPIKeyBodyValues;
 
 namespace GingerWebServicePlugin.Client
 {
-    class RestClient : IRestClient
+    class RestClient : IHTTPClient
     {
         private string proxy;
         private string proxyUrl;
@@ -53,10 +53,11 @@ namespace GingerWebServicePlugin.Client
 
         public GingerHttpResponseMessage PerformHttpOperation(GingerHttpRequestMessage GingerRequestMessage)
         {
-        
+
+            GingerHttpResponseMessage GRM = new GingerHttpResponseMessage();
             Client = new HttpClient(Handler);
 
-            PreparBasicRequest(GingerRequestMessage);
+            PreparBasicRequest(GingerRequestMessage, GRM);
             HttpResponseMessage Response=null;
             try
             {
@@ -71,7 +72,6 @@ namespace GingerWebServicePlugin.Client
                 HandleResponseCookies(GingerRequestMessage);
             }
 
-            GingerHttpResponseMessage GRM=new GingerHttpResponseMessage();
 
             GRM.StatusCode = Response.StatusCode;
             GRM.Headers = new Dictionary<string, string>();
@@ -113,8 +113,9 @@ namespace GingerWebServicePlugin.Client
             }
         }
 
-        private void PreparBasicRequest(GingerHttpRequestMessage GingerRequestMessage)
+        private void PreparBasicRequest(GingerHttpRequestMessage GingerRequestMessage, GingerHttpResponseMessage GRM)
         {
+            GRM.RequestBodyString = GingerRequestMessage.BodyString;
 
             Client.BaseAddress = GingerRequestMessage.URL;
 
@@ -144,7 +145,7 @@ namespace GingerWebServicePlugin.Client
 
 
             SetCookies(GingerRequestMessage);
-            SetRequestContent(Method, GingerRequestMessage);
+            SetRequestContent(Method, GingerRequestMessage, GRM);
         }
 
 
@@ -211,7 +212,7 @@ namespace GingerWebServicePlugin.Client
             }
         }
 
-          private void SetRequestContent( HttpMethod RequestMethod, GingerHttpRequestMessage GingerRequestMessage)
+          private void SetRequestContent( HttpMethod RequestMethod, GingerHttpRequestMessage GingerRequestMessage, GingerHttpResponseMessage GRM)
         {
             List<KeyValuePair<string, string>> KeyValues = new List<KeyValuePair<string, string>>();
 
@@ -255,6 +256,7 @@ namespace GingerWebServicePlugin.Client
                                 KeyValues.Add(new KeyValuePair<string, string>(GingerRequestMessage.RequestKeyValues[i].Param, GingerRequestMessage.RequestKeyValues[i].Value));
                             }
                             RequestMessage.Content = new FormUrlEncodedContent(RequestKeyValues);
+                          GRM.RequestBodyString=RequestMessage.Content.ToString();
                         }
                         break;
                     case eContentType.FormData:
@@ -276,6 +278,7 @@ namespace GingerWebServicePlugin.Client
                                 }
 
                             }
+                            GRM.RequestBodyString = requestContent.ToString();
                             RequestMessage.Content = requestContent;
                         }
                         break;
