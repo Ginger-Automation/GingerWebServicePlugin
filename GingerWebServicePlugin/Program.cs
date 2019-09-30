@@ -23,7 +23,7 @@ namespace GingerWebServicePlugin
                 }
                 else
                 {
-                    gingerNodeStarter.StartNode("Rest Service 1", new RestService(),"10.20.121.221",15074);
+                    gingerNodeStarter.StartNode("Rest Service 1", new WebServicePlugin(),"10.20.121.221",15037);
 
                 }
                 gingerNodeStarter.Listen();
