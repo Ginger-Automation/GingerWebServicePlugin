@@ -15,7 +15,7 @@ namespace GingerWebServicePluginTests
     public class Tests
     {
    
-        public static RestService Service=null;
+        public static WebServicePlugin Service=null;
         [AssemblyInitialize]
         public static void AssemblyInitialize(TestContext TestContext)
         {
@@ -28,7 +28,7 @@ namespace GingerWebServicePluginTests
             {
                 throw new Exception("Customers Web API server not ready");
             }
-            Service = new RestService();
+            Service = new WebServicePlugin();
             Service.StartSession();
 
             TestResources.Assembly = Assembly.GetExecutingAssembly();
