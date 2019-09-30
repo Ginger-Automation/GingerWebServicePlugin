@@ -7,7 +7,7 @@ namespace GingerWebServicePlugin
 {
     class Program
     {
-        internal static List<RestService> DriverSessions = new List<RestService>();
+        internal static List<WebServicePlugin> DriverSessions = new List<WebServicePlugin>();
         static void Main(string[] args)
         {
 
@@ -23,7 +23,7 @@ namespace GingerWebServicePlugin
                 }
                 else
                 {
-                    gingerNodeStarter.StartNode("Rest Service 1", new RestService(),"10.20.121.209",15004);
+                    gingerNodeStarter.StartNode("Rest Service 1", new WebServicePlugin(),"10.20.121.221",15037);
 
                 }
                 gingerNodeStarter.Listen();
@@ -32,7 +32,7 @@ namespace GingerWebServicePlugin
 
         private static void CleanUp(object sender, EventArgs e)
         {
-            foreach (RestService RS in DriverSessions)
+            foreach (WebServicePlugin RS in DriverSessions)
             {
 
                 try

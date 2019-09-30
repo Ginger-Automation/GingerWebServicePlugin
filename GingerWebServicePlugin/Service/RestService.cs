@@ -10,8 +10,8 @@ using System.Text;
 
 namespace GingerWebServicePlugin.Service
 {
-    [GingerService("RestService", "Rest Service")]
-    public class RestService : IServiceSession, IWebServicePlatform
+    [GingerService("GingerWebService", "Web Service Plugin")]
+    public class WebServicePlugin : IServiceSession, IWebServicePlatform
     {
         public IPlatformActionHandler PlatformActionHandler { get; set; } = new WebServicePlatformActionHandler();
 
@@ -26,7 +26,7 @@ namespace GingerWebServicePlugin.Service
         [MinLength(10)]
         [ServiceConfiguration("Proxy Url", "Proxy URL or prixy autoconfig url")]
         public string ProxyUrl { get; set; }
-        public IRestClient RestClient { get; set; }
+        public IHTTPClient RestClient { get; set; }
 
         #endregion
 
