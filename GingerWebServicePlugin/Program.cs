@@ -7,7 +7,7 @@ namespace GingerWebServicePlugin
 {
     class Program
     {
-        internal static List<RestService> DriverSessions = new List<RestService>();
+        internal static List<WebServicePlugin> DriverSessions = new List<WebServicePlugin>();
         static void Main(string[] args)
         {
 
@@ -32,7 +32,7 @@ namespace GingerWebServicePlugin
 
         private static void CleanUp(object sender, EventArgs e)
         {
-            foreach (RestService RS in DriverSessions)
+            foreach (WebServicePlugin RS in DriverSessions)
             {
 
                 try
